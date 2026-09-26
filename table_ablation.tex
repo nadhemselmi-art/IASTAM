@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Ablations (20 days, per-day averages)}\label{tab:abl}
+\footnotesize
+\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Variant & Value/d & Compl.\% & Wh/d & SOC$_{\min}$ & $T_{\max}$ & Shed\%\\
+\midrule
+E-LOTUS (full, $V$=0.3) & 152.1 & 83.2 & 217 & 68 & 49.7 & 0.0\\
+\quad w/o ISLL offload & 149.1 & 71.7 & 217 & 68 & 49.6 & 0.0\\
+\quad w/o entropy weighting & 127.0 & 78.1 & 222 & 20 & 54.1 & 0.0\\
+\quad raw entropy only & 139.3 & 83.8 & 222 & 20 & 53.5 & 0.0\\
+\quad static floors & 152.1 & 83.2 & 217 & 68 & 49.7 & 0.0\\
+E-LOTUS, $V$=0.01 & 150.7 & 78.9 & 219 & 28 & 46.5 & 0.0\\
+\quad static floors, $V$=0.01 & 148.0 & 77.9 & 221 & 33 & 46.6 & 0.0\\
+\bottomrule
+\end{tabular}
+\end{table}

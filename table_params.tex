@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{Simulation parameters}\label{tab:params}
+\footnotesize
+\begin{tabular}{@{}p{0.24\columnwidth}p{0.70\columnwidth}@{}}
+\toprule
+Orbit & PHISAT-2 (NORAD 60470), CelesTrak TLE epoch 2026-09-26, SGP4, $\Delta t=10$ s\\
+Altitude / period & \AltMin--\AltMax\ km, $i=\TleInc^\circ$, $T=\PeriodMin$ min, eclipse $\le$\EclMax\ min\\
+Ground stations & KSAT SvalSat, ASI Matera; mask $10^\circ$; \ContactMin\ min/day\\
+Earth data & NASA GIBS daily VIIRS/MODIS, \DateStart\ to \DateEnd, 313 km quick-look blocks\\
+Battery & 100 Wh LiFePO$_4$, $\eta_c=\eta_d=0.95$, $P_{\rm ch}\le40$ W\\
+Floors & $E_{\rm crit}=20$ Wh, $E_{\rm res}=30$ Wh (+ eclipse term)\\
+Solar array & 3 body faces $\times$ 20 W at normal incidence\\
+Loads & bus 5 W; GPU 1.5/15 W; TX 12 W; ISL 8 W\\
+Compute & Jetson Orin-class, 1000 GFLOP/s eff.; 900 GFLOP/MB\\
+Product & $\kappa=0.03$, $\eta_p=0.9$\\
+Radiator & $\epsilon=0.85$, $A=0.045$ m$^2$, $C=1500$ J/K\\
+Thermal limits & $T_{\rm safe}=45^\circ$C (soft), $T_{\max}=60^\circ$C (throttle)\\
+Env. heat & $Q_{\rm sun}=6$ W (sunlit), $Q_{\rm IR}=3$ W\\
+Links & S/X 10 Mbps; optical ISL 100 Mbps, neighbours $\pm30^\circ$\\
+Donor model & 400 GFLOP/s spare, 60 TFLOP bucket\\
+Storage & 8 GB ring buffer\\
+Deadlines & alert 90 min, routine 12 h\\
+E-LOTUS & $V=0.3$, $\zeta=0.5$, $\alpha=3$, $\varepsilon=0.1$, $\Delta E=5$ Wh, $\Delta T=5$ K\\
+\bottomrule
+\end{tabular}
+\end{table}

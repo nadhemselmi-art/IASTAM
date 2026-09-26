@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{20-day benchmark (seed 2026): per-day averages. Ceiling = contact-limited upper bound (176.4 value/day). Best in bold.}\label{tab:main}
+\footnotesize
+\setlength{\tabcolsep}{3.1pt}
+\begin{tabular}{@{}lrrrrrrrrrrrrr@{}}
+\toprule
+Controller & Value/day & \% ceil. & Compl.\,\% & Alerts\,\% & Energy Wh/d & Value/Wh & Lat.\,min & SOC$_{\min}$\,\% & $T_{\max}$\,$^\circ$C & Shed\,\% & GPU\,\% & DL\,\% & Ovf./d\\
+\midrule
+\textbf{E-LOTUS (ours)} & \textbf{152.1} & \textbf{86.2} & \textbf{83.2} & 75.5 & 217 & 0.70 & 160 & 68 & 49.7 & 0.0 & 51 & 84 & 213\\
+Rule-Based & 144.0 & 81.6 & 49.7 & \textbf{75.6} & 161 & 0.90 & 133 & 66 & 45.3 & 0.0 & 33 & 100 & 713\\
+Store-and-Forward & 72.7 & 41.2 & 7.5 & 64.3 & 52 & \textbf{1.40} & 77 & 68 & 15.2 & 0.0 & 0 & 100 & 1324\\
+Always-Transmit & 3.4 & 1.9 & 7.4 & 0.0 & 52 & 0.07 & 165 & 68 & 15.2 & 0.0 & 0 & 100 & 1284\\
+Greedy-Process & 5.7 & 3.2 & 10.1 & 1.8 & 219 & 0.03 & 543 & 18 & 60.1 & 39.0 & 60 & 4 & 325\\
+\bottomrule
+\end{tabular}
+\end{table*}

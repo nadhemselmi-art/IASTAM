@@ -1,0 +1,72 @@
+Table~\ref{tab:main} summarises the \Days-day run on real data. E-LOTUS delivers \ELvalueDay\ units of semantic value per day, which is \ELceil\% of the contact-limited ceiling of \CeilDay/day. It never load-sheds and never throttles.
+
+\emph{Naive baselines.} Always-Transmit and Store-and-Forward leave the GPU idle and can move only \DlGBDay~GB/day of the \RawGBDay~GB/day produced, so most data is overwritten in the ring buffer. On real imagery this is severe. Two thirds of the scenes are cloudy, so FIFO downlink of raw data (Always-Transmit) returns only \ATvalueDay/day, and E-LOTUS delivers $\ELvalueGainAT\times$ more. Store-and-Forward forwards by priority, which saves most alerts (\SFalerts\% on time) and gives the lowest latency (\SFlat~min), but E-LOTUS still delivers $\ELvalueGainSF\times$ its value.
+
+\emph{Greedy-Process collapses.} It averages only \GPvalueDay/day and spends \GPshed\% of the time load-shed. Running the GPU in FIFO order through sunlit arcs drives the node to $T_{\max}$ (\GPtmax\,$^\circ$C). The same policy then drains the battery to the hard floor (SOC$_{\min}$ \GPsocmin\%), after which the node oscillates between shedding and recovery. Under overload, FIFO service also means the oldest items are processed first, and those items are closest to expiry, so their products miss their AoI deadlines before the next pass.
+
+\emph{Strong rule engine.} Rule-Based uses the same value estimate \eqref{eq:west} and the same ISL, so it isolates what the Lyapunov machinery adds. E-LOTUS delivers \ELvalueGainRB\% more value and \ELcomplDelta~percentage points higher completion (\ELcompl\% vs.\ \RBcompl\%), with \ELovfRed\% fewer ring-buffer overwrites. It does so by spending \ELenergyDeltaPct\% more payload energy (\ELenergy\ vs.\ \RBenergy~Wh/day). Both controllers keep the battery above 65\% (SOC$_{\min}$ \ELsocmin\% vs.\ \RBsocmin\%), so the extra energy is solar input that the rule engine's fixed thresholds leave unused. The costs are a warmer node (\ELtmax\ vs.\ \RBtmax\,$^\circ$C, since the thermal deficit is soft by design and $T_{\max}$ is never approached) and a longer mean latency (\ELlat\ vs.\ \RBlat~min). The latency difference arises because E-LOTUS processes, and later delivers, many routine scenes that the rule engine simply lets expire. Alert delivery is the same for both (\ELalerts\% vs.\ \RBalerts\% on time), because it is bounded by pass geometry.
+
+Fig.~\ref{fig:telemetry} shows the mechanism over the first real day. Greedy-Process saturates the radiator in sunlight and then drains the battery. E-LOTUS instead holds $T$ near $T_{\rm safe}$ by interleaving \textsc{Process} with \textsc{Store}, spends the stored heat margin during eclipse, and moves work to the neighbours (green) at the ends of each eclipse, when a donor is sunlit.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{fig4_telemetry.png}
+\caption{First 24~h of the main run (real orbit and real scenes of \DateStart). Shaded bands mark eclipse. Top to bottom: battery SOC with the eclipse-aware floor $E_{\min}(t)$ and the load-shed threshold; node temperature; backlog $q(t)$; action taken by E-LOTUS.}
+\label{fig:telemetry}
+\end{figure*}
+
+\input{table_results.tex}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig5_pareto.png}
+\caption{Value versus payload energy (\Days-day per-day averages, real data). The E-LOTUS family ($V\in[0.01,3]$) delivers the most value. Store-and-Forward is the most frugal, and Greedy-Process spends the same energy as E-LOTUS for almost no value.}
+\label{fig:pareto}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig7_cumulative.png}
+\caption{Cumulative delivered semantic value over the \Days-day real-data run.}
+\label{fig:cum}
+\end{figure}
+
+\subsection{Effect of the trade-off parameter $V$}
+Fig.~\ref{fig:vsweep} sweeps $V$ over two and a half decades. The net utility $\bar U-\zeta\bar{\mathcal E}$ rises from \VnetLo\ per day at $V=0.01$ to a plateau of about \VnetHi\ for $V\ge0.3$. On the plateau it varies by less than 3\%, which is within the effect of the greedy multi-resource fill. The mean backlog grows monotonically from \VqLo\ to \VqHi~GB. Both trends are consistent with the $[O(1/V),O(V)]$ prediction of Theorem~\ref{thm:dpp}. They are compressed because long-run energy is set by the harvest and the backlog saturates near the 8~GB storage limit. The clearest effect of $V$ is on the battery. For $V\le0.1$ the queue term dominates and E-LOTUS draws the battery down to its eclipse-aware floor (SOC$_{\min}$ \VsocLo\%). For $V\ge0.3$ the SOC never falls below \VsocHi\%. Operators can therefore choose the depth of discharge with one number.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{fig6_vsweep.png}
+\caption{Sweep of the Lyapunov trade-off parameter $V$ (\Days\ real days each).}
+\label{fig:vsweep}
+\end{figure*}
+
+\subsection{Ablations}
+Table~\ref{tab:abl} removes one component at a time.
+
+\emph{The value estimator} matters most. With priority flags only, value falls by \NoEntdrop\%. With raw entropy and no land prior, which was our original design, value falls by \Rawdrop\%. In both cases the engine spends energy on bright, textured cloud scenes, and the SOC drops to about \Rawsocmin\%, just above the load-shed threshold, with the node reaching \Rawtmax\,$^\circ$C. The land prior is therefore worth +\RawGainEL\% of value on real data.
+
+\emph{ISL offload}: removing it lowers value by \NoISLdrop\% (\NoISLvalue\ vs.\ \ELvalueDay/day), lowers completion from \ELcompl\% to \NoISLcompl\%, and raises overwrites from \ELovf\ to \NoISLovf\ per day.
+
+\emph{Eclipse-aware floors} leave results unchanged at $V=0.3$, where the battery never approaches them. At $V=0.01$, where the battery is drawn down, static floors deliver \StaticLowVvalue/day against \LowVvalue/day with eclipse-aware floors, a \StaticLowVdrop\% loss. The floors thus act as protection that engages only when it is needed.
+
+\input{table_ablation.tex}
+
+\subsection{Robustness}\label{sec:stress}
+Table~\ref{tab:stress} repeats the comparison on 24-h windows over different real days with independent arrival seeds: five for the nominal case and three per stress scenario. Across the five nominal days, E-LOTUS delivers $\MSelValue\pm\MSelValueStd$ against $\MSrbValue\pm\MSrbValueStd$ for Rule-Based (+\MSgain\%). It completes \MScomplDelta~points more tasks with \MSenergyWord\ payload energy and \MSlatWord\ latency.
+
+E-LOTUS delivers more value than Rule-Based in \StressWins\ of \StressN\ stress scenarios (gain between \StressGainMin\% and \StressGainMax\%), with completion gains between \StressComplMin\ and \StressComplMax\ points. With a degraded radiator ($k=0.75$), Greedy-Process is throttled \RadGPthr\% of the time. E-LOTUS exceeds the soft limit by design (\RadELtmax\,$^\circ$C), trading it against value, but never reaches $T_{\max}$. Rule-Based stays competitive in value wherever its hand-set thresholds happen to fit, but it has no mechanism to trade value against backlog, which shows up as consistently lower completion.
+
+\input{table_stress.tex}
+
+\subsection{Limitations}
+The orbit, imagery, fire detections and cloud fractions are real. The following elements remain modelled. Acquisitions follow a Poisson strip-mapping process. Scene sizes and GFLOP costs are payload assumptions. Quick-looks come from VIIRS at about 10~km per pixel rather than from the node's own imager. The ground-truth value function ($w^{\rm true}$) is a mission-design choice. The TLE is propagated backwards up to 31 days from its epoch, which costs along-track accuracy of the order of kilometres to tens of kilometres, small against the 313~km scene. The thermal model is a single lumped node, the shadow model is cylindrical, and neighbours donate compute through a token bucket rather than as full nodes. The engine assumes perfect state knowledge, and radiation effects are not modelled. The value gain over a well-tuned rule engine is moderate (+\ELvalueGainRB\%), because the ceiling is set by pass geometry: alerts generated just after a pass cannot reach the ground within 90~min whatever the controller does. The larger gains are in completion, overflow, and robustness without re-tuning.
+
+\subsection{Roadmap and validation plan for Phase 3}
+\begin{enumerate}
+\item \textbf{Hardware-in-the-loop.} Run \texttt{engine.py}'s decision epoch on a Jetson Orin Nano development kit (15~W mode) with INA power telemetry. Calibrate GFLOP/J, inference latency, and the thermal constant $C$ in a thermal-vacuum-like enclosure. Acceptance: decision latency below 5~ms per slot.
+\item \textbf{Onboard cloud screening.} Real data show that clouds are the main failure of entropy. Replace the land-prior term with a CloudScout-type network on full-resolution Sentinel-2 L1C quick-looks, and report the gain in triage against the \CapOracle\% oracle.
+\item \textbf{Distributed swarm DPP.} Neighbours exchange $(q,D_E,D_T)$ over the ISL and apply backpressure routing, replacing the token-bucket donor with full symmetric nodes.
+\item \textbf{Higher-fidelity physics.} Use a two-node thermal network (die and radiator), a conical penumbra model, battery ageing, and SEU-induced retries.
+\item \textbf{Validation criteria.} Reach at least 85\% of the contact-limited ceiling, zero load-shed events, $T\le T_{\rm safe}+5$~K, and at least 10 points higher completion than a tuned rule engine across at least 10 real days, 3 orbits (including a dawn--dusk SSO) and all seasons.
+\end{enumerate}

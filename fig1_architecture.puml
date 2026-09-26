@@ -1,0 +1,90 @@
+@startuml fig1_architecture
+skinparam dpi 160
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 11
+skinparam shadowing false
+skinparam roundCorner 8
+skinparam ArrowColor #52514e
+skinparam ArrowThickness 1.1
+skinparam componentStyle rectangle
+skinparam rectangle {
+  BorderColor #52514e
+  BackgroundColor #fcfcfb
+}
+skinparam component {
+  BorderColor #52514e
+  BackgroundColor #fcfcfb
+  FontSize 11
+}
+skinparam node {
+  BorderColor #52514e
+  BackgroundColor #fcfcfb
+}
+skinparam package {
+  BorderColor #52514e
+  FontStyle bold
+}
+top to bottom direction
+
+
+package "Payload sensing" #EEF4FC {
+  [VNIR / TIR imager] as IMG
+  [Quick-look thumbnail\n32x32, 8-bit] as QL
+  [Semantic entropy\nH(S_i) = -sum P(x) log2 P(x)] as ENT
+  [TIR hot-pixel trigger\npriority p_i in {1,2,4}] as TRIG
+}
+
+package "Onboard state estimation  x(t)" #F4F3EF {
+  [EPS: battery E_b(t),\nsolar incidence theta(t)] as EPS
+  [Thermal: node T(t),\nQ_rad = k eps sigma A (T^4 - T_space^4)] as TH
+  [Mass memory: m(t), q(t)\nring buffer, AoI clocks] as MEM
+  [Orbit predictor (RK4 + J2):\neclipse, contact g(t), ISLL l(t)] as ORB
+}
+
+package "E-LOTUS decision engine" #E8F3EE {
+  [Eclipse-aware floors\nE_min(t), E_surv(t)] as FLOOR
+  [Predictive drift\nDelta L_i(a) (exponential\nintegrator of RK4 model)] as DRIFT
+  [Semantic penalty\nU_i(a) = w_i eta_a phi(age+d_a)\n - zeta * energy] as UTIL
+  [Feasibility filter\nE_a > E_surv, T_a < T_max] as FEAS
+  [Rate-normalised DPP\nargmin (Delta L - V U) / tau] as DPP
+}
+
+package "Actuation  A = {PROCESS, STORE, TRANSMIT, OFFLOAD_ISLL}" #FDF1EA {
+  [PROCESS\nJetson Orin-class GPU, 15 W] as GPU
+  [STORE\nkeep in mass memory] as STO
+  [TRANSMIT\nS/X band, 10 Mbps] as TX
+  [OFFLOAD_ISLL\noptical ISL, 100 Mbps] as ISL
+}
+
+rectangle "Hardware interlocks\n(identical for all controllers)\nload-shed E_b < E_crit\nthrottle T >= T_max" as HW #FBEAEA
+node "Neighbour nodes +/- 30 deg\n(sunlit donors)" as NB
+node "Ground stations\nSvalbard, Tunis" as GS
+
+IMG --> QL
+QL --> ENT
+IMG --> TRIG
+ENT --> MEM : task i (H_i, w_i)
+TRIG --> MEM
+EPS --> FLOOR
+ORB --> FLOOR
+EPS --> DRIFT
+TH --> DRIFT
+MEM --> DRIFT
+FLOOR --> DRIFT
+MEM --> UTIL
+ORB --> UTIL : contact wait
+DRIFT --> FEAS
+UTIL --> DPP
+FEAS --> DPP
+DPP --> GPU
+DPP --> STO
+DPP --> TX
+DPP --> ISL
+HW ..> GPU
+HW ..> TX
+HW ..> ISL
+GPU --> MEM : product (3% size)
+TX --> GS
+ISL --> NB
+NB --> GS : product via\nneighbour pass
+@enduml

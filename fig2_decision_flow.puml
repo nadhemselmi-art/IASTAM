@@ -1,0 +1,56 @@
+@startuml fig2_decision_flow
+skinparam dpi 220
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 11
+skinparam shadowing false
+skinparam ArrowColor #52514e
+skinparam activity {
+  BorderColor #52514e
+  BackgroundColor #fcfcfb
+  DiamondBorderColor #52514e
+  DiamondBackgroundColor #F4F3EF
+}
+
+
+start
+:Observe state x(t) = [E_b, g, m, T, c, q, H_bar, AoI]^T
+and the exogenous orbit state (sunlit, g(t), l(t));
+:Ingest arrivals: thumbnail -> H(S_i), trigger -> p_i,
+w_i = p_i (H_i / 8)^alpha, deadline D_i;
+if (m(t) > storage limit?) then (yes)
+  :Ring buffer evicts oldest item;
+else (no)
+endif
+:Purge items with age > D_i (AoI expiry);
+:Hardware interlocks:
+load-shed if E_b < E_crit, throttle if T >= T_max;
+repeat
+  :Build candidate pairs (i, a) with a in PROCESS, TRANSMIT, OFFLOAD_ISLL
+  over the free resources (OFFLOAD only in local eclipse
+  with a sunlit neighbour in line of sight);
+  :For every candidate predict service time tau, energy,
+  and end-of-service states (E_a, T_a) versus STORE (E_s, T_s);
+  :Predicted drift (relative to STORE)
+  dL = [(q-mu)^2 - q^2] / 2Q^2 + [D_E(E_a)^2 - D_E(E_s)^2] / 2dE^2
+       + [D_T(T_a)^2 - D_T(T_s)^2] / 2dT^2 ;
+  :Semantic utility U = w_i eta_a phi(age + d_a) - zeta * energy
+  (zeta = 0 while the solar array is shunting);
+  if (E_a > E_surv(t+tau) and T_a < T_max ?) then (feasible)
+    :Phi(i, a) = (dL - V U) / tau;
+  else (infeasible)
+    :Phi(i, a) = +inf;
+  endif
+  if (min Phi < 0 ?) then (yes)
+    :Dispatch argmin (i*, a*) to its resource
+    (PROCESS: GPU, product re-enters memory,
+     TRANSMIT: S/X downlink,
+     OFFLOAD_ISLL: neighbour, delivered at its pass);
+  else (no)
+    :STORE is optimal for all remaining items;
+  endif
+repeat while (a resource is still free and some Phi < 0 ?) is (yes)
+->no;
+:Integrate E_b(t) and T(t) with RK4 over the slot;
+:Log telemetry, decisions, deliveries, AoI;
+stop
+@enduml
