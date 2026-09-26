@@ -1,0 +1,138 @@
+running 90 simulations on 2 processes ...
+  [stress:Svalbard only] Rule-Based                1.0s  value=   132.4
+  [stress:Svalbard only] Greedy-Process            0.7s  value=    51.8
+  [stress:Svalbard only] E-LOTUS                   2.1s  value=   140.0
+  [stress:Svalbard only] Rule-Based                1.1s  value=   154.3
+  [stress:Svalbard only] E-LOTUS                   2.2s  value=   159.8
+  [stress:Svalbard only] Greedy-Process            0.9s  value=    25.8
+  [stress:Svalbard only] Rule-Based                1.0s  value=   130.8
+  [stress:Svalbard only] Greedy-Process            0.7s  value=    39.4
+  [stress:Svalbard only] E-LOTUS                   2.1s  value=   138.2
+  [stress:radiator x0.75] Rule-Based                0.9s  value=   134.1
+  [stress:radiator x0.75] Greedy-Process            0.7s  value=    42.5
+  [stress:radiator x0.75] E-LOTUS                   2.0s  value=   137.3
+  [stress:radiator x0.75] Rule-Based                0.9s  value=   162.3
+  [stress:radiator x0.75] Greedy-Process            0.7s  value=    40.6
+  [stress:radiator x0.75] E-LOTUS                   2.3s  value=   165.0
+  [stress:radiator x0.75] Rule-Based                0.9s  value=   129.7
+  [stress:radiator x0.75] Greedy-Process            0.7s  value=    40.2
+  [stress:radiator x0.75] E-LOTUS                   2.0s  value=   134.2
+  [stress:load x1.5] Rule-Based                1.0s  value=   211.6
+  [stress:load x1.5] Greedy-Process            0.9s  value=    34.6
+  [stress:load x1.5] E-LOTUS                   2.1s  value=   218.2
+  [stress:load x1.5] Rule-Based                1.1s  value=   249.5
+  [stress:load x1.5] E-LOTUS                   2.2s  value=   253.1
+  [stress:load x1.5] Greedy-Process            1.0s  value=     7.9
+  [stress:load x1.5] Rule-Based                1.2s  value=   211.6
+  [stress:load x1.5] E-LOTUS                   2.2s  value=   219.8
+  [stress:load x1.5] Greedy-Process            1.0s  value=    14.4
+  [stress:SOC0 35%] Rule-Based                1.1s  value=   136.4
+  [stress:SOC0 35%] E-LOTUS                   2.3s  value=   141.7
+  [stress:SOC0 35%] Greedy-Process            1.2s  value=     4.6
+  [stress:SOC0 35%] E-LOTUS static E_min      2.1s  value=   141.7
+  [seeds     ] E-LOTUS                   2.2s  value=   167.5
+  [seeds     ] Always-Transmit           0.5s  value=     5.0
+  [seeds     ] Greedy-Process            0.7s  value=    41.6
+  [seeds     ] Store-and-Forward         0.6s  value=   102.2
+  [seeds     ] Rule-Based                1.0s  value=   158.6
+  [stress:storage 4 GB] Rule-Based                0.8s  value=   136.3
+  [stress:storage 4 GB] E-LOTUS                   1.8s  value=   143.9
+  [stress:storage 4 GB] Greedy-Process            0.9s  value=    70.0
+  [stress:SOC0 35%] Rule-Based                1.1s  value=   164.8
+  [stress:SOC0 35%] E-LOTUS                   2.3s  value=   168.0
+  [stress:SOC0 35%] Greedy-Process            1.1s  value=     2.7
+  [stress:SOC0 35%] E-LOTUS static E_min      2.0s  value=   168.0
+  [seeds     ] Always-Transmit           0.6s  value=     1.6
+  [seeds     ] E-LOTUS                   2.2s  value=   158.9
+  [seeds     ] Greedy-Process            0.8s  value=    43.3
+  [seeds     ] Store-and-Forward         0.6s  value=    67.4
+  [seeds     ] Rule-Based                0.9s  value=   155.0
+  [stress:storage 4 GB] Rule-Based                0.8s  value=   164.4
+  [stress:storage 4 GB] E-LOTUS                   1.8s  value=   170.4
+  [stress:storage 4 GB] Greedy-Process            0.7s  value=    61.2
+  [day       ] Greedy-Process            0.8s  value=    64.6
+  [day       ] E-LOTUS                   2.1s  value=   171.5
+  [stress:SOC0 35%] Rule-Based                0.9s  value=   134.0
+  [stress:SOC0 35%] E-LOTUS                   2.0s  value=   139.6
+  [stress:SOC0 35%] Greedy-Process            0.9s  value=     3.2
+  [stress:SOC0 35%] E-LOTUS static E_min      2.2s  value=   139.6
+  [stress:storage 4 GB] E-LOTUS                   1.7s  value=   142.0
+  [stress:storage 4 GB] Rule-Based                0.7s  value=   134.1
+  [stress:storage 4 GB] Greedy-Process            0.6s  value=    50.6
+  [seeds     ] Always-Transmit           0.5s  value=     2.5
+  [seeds     ] Greedy-Process            0.7s  value=    59.0
+  [seeds     ] Store-and-Forward         0.6s  value=    73.0
+  [seeds     ] E-LOTUS                   2.1s  value=   152.3
+  [seeds     ] Rule-Based                0.9s  value=   144.9
+  [seeds     ] Always-Transmit           0.6s  value=    10.1
+  [seeds     ] Greedy-Process            0.7s  value=    52.2
+  [seeds     ] E-LOTUS                   2.1s  value=   137.6
+  [seeds     ] Store-and-Forward         0.6s  value=    62.3
+  [seeds     ] Rule-Based                1.0s  value=   131.5
+  [seeds     ] Always-Transmit           0.5s  value=     2.9
+  [seeds     ] Greedy-Process            0.8s  value=    49.1
+  [seeds     ] E-LOTUS                   2.0s  value=   161.2
+  [seeds     ] Store-and-Forward         0.6s  value=    78.3
+  [seeds     ] Rule-Based                1.0s  value=   154.6
+  [main      ] Always-Transmit          11.7s  value=    68.3
+  [main      ] Greedy-Process           21.0s  value=   114.1
+  [main      ] E-LOTUS                  40.7s  value=  3042.7
+  [main      ] Store-and-Forward        11.4s  value=  1453.7
+  [main      ] Rule-Based               19.5s  value=  2879.9
+  [main      ] E-LOTUS w/o ISLL         39.4s  value=  2981.4
+  [main      ] E-LOTUS w/o entropy      43.1s  value=  2540.7
+  [main      ] E-LOTUS static E_min     40.7s  value=  3042.7
+  [main      ] E-LOTUS static E_min V=0.01   42.5s  value=  2959.5
+  [main      ] E-LOTUS raw entropy      45.5s  value=  2785.4
+  [vsweep    ] E-LOTUS V=0.01           41.7s  value=  3013.3
+  [vsweep    ] E-LOTUS V=0.03           41.3s  value=  3033.3
+  [vsweep    ] E-LOTUS V=0.1            41.0s  value=  3043.7
+  [vsweep    ] E-LOTUS V=1              42.2s  value=  3039.7
+  [vsweep    ] E-LOTUS V=3              40.9s  value=  3033.5
+done in 318s
+
+=== MAIN (per day averages over 20 days, seed 2026) ===
+policy                        value ceiling_pc completion alerts_on_ energy_pay value_per_ latency_me soc_min_pc temp_max_c   shed_pct throttled_ gpu_duty_p dl_util_pc   overflow  offloaded
+E-LOTUS                      152.13      86.24      83.20      75.47     217.13       0.70     160.25      68.23      49.65       0.00       0.00      51.36      84.39     212.55     188.80
+Always-Transmit                3.42       1.94       7.42       0.00      51.85       0.07     165.14      68.40      15.23       0.00       0.00       0.00     100.00    1284.45       0.00
+Greedy-Process                 5.71       3.23      10.10       1.79     218.64       0.03     543.02      18.45      60.07      39.03       0.05      60.49       4.45     325.45       0.00
+Store-and-Forward             72.69      41.20       7.51      64.30      51.85       1.40      77.32      68.40      15.23       0.00       0.00       0.00     100.00    1324.10       0.00
+Rule-Based                   144.00      81.63      49.74      75.55     160.66       0.90     133.34      65.62      45.32       0.00       0.00      33.41     100.00     712.60      73.05
+E-LOTUS w/o ISLL             149.07      84.51      71.69      75.47     217.09       0.69     157.58      68.21      49.63       0.00       0.00      51.63      87.20     389.20       0.00
+E-LOTUS w/o entropy          127.03      72.01      78.14      66.50     221.77       0.57     180.01      20.29      54.10       0.00       0.00      53.42      74.08     195.15     112.00
+E-LOTUS static E_min         152.13      86.24      83.20      75.47     217.13       0.70     160.25      68.23      49.65       0.00       0.00      51.36      84.39     212.55     188.80
+E-LOTUS static E_min V=0.01     147.97      83.88      77.88      74.41     220.91       0.67     180.64      32.66      46.55       0.00       0.00      53.78      58.53     261.95     212.45
+E-LOTUS raw entropy          139.27      78.95      83.75      72.21     221.59       0.63     157.10      20.36      53.51       0.00       0.00      52.56      87.86     187.25     196.60
+
+=== V SWEEP ===
+V=0.01       150.66      85.41      78.88      75.47     218.59       0.69     169.28      28.11      46.54       0.00       0.00      51.54      89.76     262.20     208.50  q=7374
+V=0.03       151.66      85.97      81.10      75.47     218.75       0.69     166.44      27.84      48.01       0.00       0.00      51.70      87.60     236.35     204.95  q=7411
+V=0.1        152.18      86.27      83.56      75.39     218.76       0.70     156.60      27.34      49.21       0.00       0.00      51.74      86.90     198.40     193.35  q=7449
+V=0.3        152.13      86.24      83.20      75.47     217.13       0.70     160.25      68.23      49.65       0.00       0.00      51.36      84.39     212.55     188.80  q=7605
+V=1          151.99      86.16      83.19      75.14     217.99       0.70     163.39      68.23      50.26       0.00       0.00      51.95      77.77     211.05     189.35  q=7606
+V=3          151.68      85.98      79.90      75.39     218.44       0.69     163.07      68.23      50.45       0.00       0.00      52.39      72.35     259.35     148.95  q=7646
+
+=== MULTI-SEED 24 h (mean ± std) ===
+E-LOTUS                    155.5±10.2     85.5±0.8      71.3±2.4      76.3±5.0     192.6±2.9       0.8±0.1     115.7±2.4      69.0±1.2  
+Always-Transmit              4.4±3.0       2.5±2.0       7.3±0.4       0.0±0.0      51.8±0.4       0.1±0.1     158.1±4.1      69.1±1.1  
+Greedy-Process              49.1±6.3      27.2±4.8      44.4±3.5      20.6±7.8     264.0±1.5       0.2±0.0     256.3±12.5     18.6±0.0  
+Store-and-Forward           76.6±13.9     41.9±5.5       7.2±0.3      67.7±4.7      51.8±0.4       1.5±0.3      70.9±2.0      69.1±1.1  
+Rule-Based                 148.9±9.8      81.9±1.1      48.3±1.2      76.3±5.0     161.8±5.6       0.9±0.1     124.8±2.8      67.5±1.9  
+
+=== STRESS ===
+Svalbard only   E-LOTUS              146.0±9.8      86.1±0.1      72.3±2.7      71.9±6.5     194.9±1.6       0.7±0.0     118.0±1.4      70.0±0.0      46.5±0.5  
+Svalbard only   Rule-Based           139.2±10.7     82.0±0.9      47.1±1.2      71.9±6.5     159.4±0.7       0.9±0.1     122.0±4.6      69.4±1.0      42.0±0.4  
+Svalbard only   Greedy-Process        39.0±10.6     23.4±7.4      43.9±6.1       3.5±3.6     265.4±0.8       0.1±0.0     277.7±45.9     18.6±0.0      60.0±0.1  
+radiator x0.75  E-LOTUS              145.5±13.9     82.5±0.7      51.2±1.6      71.9±6.5     131.1±1.1       1.1±0.1     126.2±5.2      70.0±0.0      55.6±1.1  
+radiator x0.75  Rule-Based           142.0±14.4     80.5±1.3      40.5±1.1      71.9±6.5     124.8±0.3       1.1±0.1     136.5±7.8      69.4±1.0      50.0±0.1  
+radiator x0.75  Greedy-Process        41.1±1.0      23.5±2.2      57.2±1.3       0.0±0.0     194.3±1.4       0.2±0.0     241.0±3.9      59.7±1.9      61.9±0.1  
+load x1.5       E-LOTUS              230.4±16.1     82.3±1.6      58.1±1.1      77.4±4.8     216.8±3.0       1.1±0.1     111.8±3.9      61.1±5.4      51.2±0.4  
+load x1.5       Rule-Based           224.2±17.8     80.1±2.3      44.7±1.1      77.4±4.8     211.7±2.7       1.1±0.1     122.3±8.4      62.3±5.2      46.6±0.5  
+load x1.5       Greedy-Process        19.0±11.4      7.0±4.4      18.8±7.1       0.0±0.0     264.2±0.6       0.1±0.0     414.5±59.7     18.3±0.2      60.1±0.1  
+SOC0 35%        E-LOTUS              149.7±12.9     85.0±0.2      64.7±1.9      71.9±6.5     165.6±1.5       0.9±0.1     111.6±4.6      35.0±0.0      44.6±0.8  
+SOC0 35%        Rule-Based           145.1±14.0     82.3±0.7      48.3±1.4      71.9±6.5     159.1±0.7       0.9±0.1     119.8±4.7      35.0±0.0      43.1±0.2  
+SOC0 35%        Greedy-Process         3.5±0.8       2.0±0.6       8.7±2.7       0.0±0.0     229.5±1.0       0.0±0.0     533.8±29.4     18.3±0.3      53.2±2.2  
+SOC0 35%        E-LOTUS static E_min   149.7±12.9     85.0±0.2      64.7±1.9      71.9±6.5     165.6±1.5       0.9±0.1     111.6±4.6      35.0±0.0      44.6±0.8  
+storage 4 GB    E-LOTUS              152.1±13.0     86.3±0.2      74.2±1.6      71.9±6.5     196.6±1.3       0.8±0.1     113.8±3.1      70.0±0.0      48.1±0.8  
+storage 4 GB    Rule-Based           145.0±13.8     82.2±0.6      48.2±1.2      71.9±6.5     161.3±0.9       0.9±0.1     115.0±5.4      69.4±1.0      43.1±0.4  
+storage 4 GB    Greedy-Process        60.6±7.9      34.6±5.3      47.2±2.9      23.1±7.1     265.3±0.8       0.2±0.0     230.8±20.9     18.6±0.0      60.0±0.0  
